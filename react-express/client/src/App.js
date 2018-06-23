@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Books from './components/books/books';
 import Genres from './components/genres/genres';
+import ProductManager from './components/productManager';
 
 class App extends Component {
+
+  constructor(props){
+    super(props);
+  }
+
   render() {
     return (
       <div className="App">
-        <Genres />
+        <ProductManager />
+        {/* <Genres /> */}
         {/* <Books /> */}
       </div>
     );
