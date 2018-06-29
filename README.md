@@ -11,3 +11,7 @@ https://www.youtube.com/watch?v=oQnojIyTXb8
     "editor.fontSize": 18,
     "editor.fontLigatures": true
 }
+
+https://www.youtube.com/watch?v=3NdgP6AVYYs&index=16&list=PL4cUxeGkcC9iK6Qhn-QLcXCXPQUov1U7f
+
+https://www.youtube.com/watch?v=rpJO0T08Bnc
