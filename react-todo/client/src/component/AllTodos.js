@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import gql from "graphql-tag";
 import { graphql, compose } from "react-apollo";
-import Paper from '@material-ui/core/Paper';
+import AddTodo from './AddTodo';
 
+import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
@@ -26,24 +27,72 @@ mutation($id: ID!, $complete: Boolean!){
 }
 `
 
-class AllTodos extends Component {
+const RemoveMutation = gql`
+mutation($id: ID!){
+  removeTodo(id:$id)
+}
+`
 
-  constructor(props){
-    super(props);
+const AddMutation = gql`
+mutation($item: String!){
+    createTodo(item: $item){
+      id
+      item
+      complete
+    }
   }
+`
 
+class AllTodos extends Component {
   
-  updateTodo = todo => () => {
- 
+  updateTodo = async todo => {
+    await this.props.updateTodo({
+      variables: {
+        id: todo.id,
+        complete: !todo.complete
+      },   
+      update: store => {
+        const data = store.readQuery({query: TodosQuery});
+        data.todos = data.todos.map(item=>
+          item.id === todo.id ?{
+            ...todo,
+            complete: !todo.complete
+          }: item
+        );
+        store.writeQuery({query: TodosQuery , data});
+      }   
+     // refetchQueries: [{query: TodosQuery}]
+    });
   };
 
-  removeTodo = todo => () => {
- 
+  removeTodo = async todo  => {
+    await this.props.removeTodo({
+      variables: {
+        id: todo.id
+      },   
+      update: store => {
+        const data = store.readQuery({query: TodosQuery});
+        data.todos = data.todos.filter(item => item.id !== todo.id);
+        store.writeQuery({query: TodosQuery , data});
+      }
+    });
+  };
+
+  addItem = async item => {
+    await this.props.addTodo({
+      variables: {
+        item
+      },   
+      update: (store, { data: { createTodo } }) => {
+        const data = store.readQuery({query: TodosQuery});
+        data.todos.unshift(createTodo);
+        store.writeQuery({query: TodosQuery , data});
+      }
+    });
   };
 
 
   render() {
-    
     let {data: {error, loading, todos}} = this.props;
     if(loading) return (<div disabled>Loading Todos....</div>);
     if (error) return (<div disabled>Error :(</div>);
@@ -51,6 +100,7 @@ class AllTodos extends Component {
       <div className="AllTodos" style={{display:"flex"}}>
         <div style={{margin:"auto", width:400}} >
           <Paper elevation={1}>
+            <AddTodo addItem = {this.addItem} />
             
             <List>
               {todos.map(todo=> (
@@ -59,7 +109,7 @@ class AllTodos extends Component {
                   role={undefined}
                   dense
                   button
-                  onClick={()=>this.updateTodo(todo)}
+                  onClick={()=>this.updateTodo.bind(this)(todo)}
                 >
                   <Checkbox
                     checked={todo.complete}
@@ -86,6 +136,8 @@ class AllTodos extends Component {
 
 
 export default compose( 
-  graphql(UpdateMutation),
+  graphql(UpdateMutation, {name: "updateTodo"}),
+  graphql(RemoveMutation, {name: "removeTodo"}),
+  graphql(AddMutation, {name: "addTodo"}),
   graphql(TodosQuery)
 )(AllTodos);
