@@ -3,11 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import { createStore, combineReducers } from 'redux';
+import { applyMiddleware, compose, createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 
 import productsReducer from './reducers/productsReducer';
 import userReducer from './reducers/userReducer';
+
 
 
 const allReducer = combineReducers({
@@ -20,15 +22,21 @@ const initialState = {
     user: 'Michale'
 };
 
+const allStoreEnhancers = compose (
+    applyMiddleware(thunk),
+    window.devToolsExtension && window.devToolsExtension()
+);
+
 const store = createStore(
-                                        allReducer, 
-                                        initialState, 
-                                        window.devToolsExtension && window.devToolsExtension() );
+                        allReducer, 
+                        initialState,
+                        allStoreEnhancers 
+                        );
 
 console.log(store.getState());
 
 ReactDOM.render(
-                            <Provider store={store} >
-                                <App />
-                            </Provider>    , document.getElementById('root'));
+                <Provider store={store} >
+                    <App />
+                </Provider>    , document.getElementById('root'));
 registerServiceWorker();

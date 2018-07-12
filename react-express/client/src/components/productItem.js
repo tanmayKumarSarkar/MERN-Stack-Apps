@@ -11,8 +11,9 @@ class ProductItem extends Component {
     }
 
     onDelete(){
-        const {name, onDelete} = this.props;
-        onDelete(name);
+        const {id, name, onDelete} = this.props;
+        onDelete(id);
+        // onDelete(name);
     }
 
     onEdit(){
@@ -21,13 +22,14 @@ class ProductItem extends Component {
 
     onEditSubmit(e){
         e.preventDefault();
-        this.props.onEdit(this.name.value, this.price.value, this.props.name);
+        //this.props.onEdit(this.name.value, this.price.value, this.props.name);
+        this.props.onEdit(this.name.value, this.price.value, this.props.id);
         this.setState({isEdit:false});
     }
 
     render() {
 
-        const {name, price} = this.props;
+        const {id, name, price} = this.props;
 
         return (
         <div className="ProductItem"> 

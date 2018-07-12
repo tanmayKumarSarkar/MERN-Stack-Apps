@@ -1,0 +1,39 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "ipad",
+      "price": 200
+    },
+    {
+      "id": 2,
+      "name": "iphone",
+      "price": 1000
+    },
+    {
+      "id": 3,
+      "name": "pen",
+      "price": 2
+    },
+    {
+      "id": 4,
+      "name": "head phone",
+      "price": 150
+    },
+    {
+      "name": "hat",
+      "price": 5,
+      "id": 6
+    },
+    {
+      "name": "shirt",
+      "price": "25",
+      "id": 8
+    },
+    {
+      "name": "router",
+      "price": "20",
+      "id": 9
+    }
+  ]
+}
