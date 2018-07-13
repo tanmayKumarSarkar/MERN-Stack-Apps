@@ -21,3 +21,7 @@ https://www.youtube.com/watch?v=tOtGnCBXU3U
 https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/todos
 
 https://www.youtube.com/watch?v=OSSpVLpuVWA
+
+https://www.youtube.com/watch?v=93p3LxR9xfM
+
+https://www.youtube.com/watch?v=PbJt7-a2274
