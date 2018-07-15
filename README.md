@@ -12,15 +12,15 @@ https://www.youtube.com/watch?v=oQnojIyTXb8
     "editor.fontLigatures": true
 }
 
-https://www.youtube.com/watch?v=3NdgP6AVYYs&index=16&list=PL4cUxeGkcC9iK6Qhn-QLcXCXPQUov1U7f
+https://www.youtube.com/watch?v=3NdgP6AVYYs&index=16&list=PL4cUxeGkcC9iK6Qhn-QLcXCXPQUov1U7f    -done
 
-https://www.youtube.com/watch?v=rpJO0T08Bnc
+https://www.youtube.com/watch?v=rpJO0T08Bnc     -done
 
 Redux: 
 https://www.youtube.com/watch?v=tOtGnCBXU3U
 https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/todos
 
-https://www.youtube.com/watch?v=OSSpVLpuVWA
+https://www.youtube.com/watch?v=OSSpVLpuVWA - done
 
 https://www.youtube.com/watch?v=93p3LxR9xfM
 
