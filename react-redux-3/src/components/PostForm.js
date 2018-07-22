@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { createPosts } from '../actions/postAction';
 
-export default class PostForm extends Component {
+class PostForm extends Component {
 
     state = {
         title: '',
@@ -14,15 +17,7 @@ export default class PostForm extends Component {
     onSubmit (e) {
         e.preventDefault();
         const post = {title: this.state.title, body: this.state.body} ;
-        fetch('http://localhost:3600/posts', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(post)
-        })
-            .then(res => res.json())
-            .then(data => console.log({posts: data}));
+        this.props.createPosts(post);
     }
 
     render() {
@@ -46,3 +41,9 @@ export default class PostForm extends Component {
         )
     }
 }
+
+PostForm.propTypes = {
+    createPosts : PropTypes.func.isRequired
+};
+
+export default connect (null, {createPosts}) (PostForm);
